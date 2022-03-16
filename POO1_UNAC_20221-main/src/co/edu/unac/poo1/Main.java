@@ -1,5 +1,7 @@
 package co.edu.unac.poo1;
 
+import co.edu.unac.poo1.unidad1.ejercicios.dos.Cafe;
+import co.edu.unac.poo1.unidad1.ejercicios.dos.SacoCafe;
 import co.edu.unac.poo1.unidad1.ejercicios.uno.SacoDeCafe;
 import co.edu.unac.poo1.unidad1.ejercicios.uno.cafe;
 import co.edu.unac.poo1.unidad1.globo.Globo;
@@ -15,8 +17,10 @@ public class Main {
     public static void main(String[] args) {
         //saludo();
         //saludoConNombre();
-        cafesAtributos();
+        //globosParaUsuario();
 
+        //cafesAtributos();
+        cafeAMano();
     }
 
     private static void saludo(){
@@ -112,44 +116,7 @@ public class Main {
         +" con un tamaño "+motoBryan.getTamano()+" y de color "+ motoBryan.getColor());
     }
 
-    private static  void goblosParaUsuario(){
-        int opcionMenu = 0;
-        Scanner scanner = new Scanner(System.in);
-        do{
-            System.out.println("Bienvenido a la aplicacion de transportes");
-            System.out.println("Por favor digite una opcion");
-            System.out.println("1. Ver Globos existentes");
-            System.out.println("2. Recomendar un tipo de Globo");
-            System.out.println("3. Ver tipos de Cascos");
-            System.out.println("4. Registrar y ver una moto");
-            System.out.println("5. Salir de la aplicacion");
-            opcionMenu = scanner.nextInt();
-            scanner.nextLine(); //Se agrega para procesar el enter despues de digitar un numero
-            switch(opcionMenu){
-                case 1:
-                    verTodosLosGlobos();
-                    break;
-                case 2:
-                    verGloboPorNumeroPersonas();
-                    break;
-                case 3:
-                    verCascosCreados();
-                    break;
-                case 4:
-                    registrarYVerMoto();
-                    break;
-                case 5:
-                    System.out.println("Hasta pronto");
-                    break;
-                default:
-                    System.err.println("ERROR: Opcion invalida");
-                    break;
-            }
-
-        }while(opcionMenu!=5);
-    }
-
-    private  static  void cafesAtributos(){
+    private static void cafesAtributos(){
     cafe cafe1 = new cafe("123a", "Tipico",4);
     cafe cafe2 = new cafe("456b", "Borbón",10);
     cafe cafe3 = new cafe("789c", "Tabi",2);
@@ -159,12 +126,53 @@ public class Main {
     SacoDeCafe saco3 = new SacoDeCafe("2222",30.5f,cafe3);
 
     System.out.println("Bienvenido a Su tienda de café");
-    System.out.println("El saco 1 de codigo," + saco1.obtenerCodigoBarras() + " ,costo,"+ saco1.obtenerCosto() + " ,y contiene el cafe asignado de serial "
-            + saco1.obtenerCafeAsignado().obtenerSerial() + " , de variedad " + saco1.obtenerCafeAsignado().obtenerVariedad()
-            + " , y la altura del cultivo es de " + saco1.obtenerCafeAsignado().obtenerAltura());
-    System.out.println("El saco 2 de codigo," + saco2.obtenerCodigoBarras() + " ,costo,"+ saco2.obtenerCosto() + " ,y contiene el cafe asignado " + saco2.obtenerCafeAsignado().obtenerVariedad());
-    System.out.println("El saco 3 de codigo," + saco3.obtenerCodigoBarras() + " ,costo,"+ saco3.obtenerCosto() + " ,y contiene el cafe asignado " + saco3.obtenerCafeAsignado().obtenerVariedad());
+
+    System.out.println("El saco 1 de codigo," + saco1.obtenerCodigoBarras() + " ,costo,"+ saco1.obtenerCosto() + " , contiene el cafe asignado de variedad "
+            + saco1.obtenerCafeAsignado().obtenerVariedad() + " , de serial " + saco1.obtenerCafeAsignado().obtenerSerial()
+            + " , y la altura del cultivo es de " + saco1.obtenerCafeAsignado().obtenerAltura() + " metros");
+
+    System.out.println("El saco 2 de codigo," + saco2.obtenerCodigoBarras() + " ,costo,"+ saco2.obtenerCosto() +
+            " ,y contiene el cafe asignado " + saco2.obtenerCafeAsignado());
+
+    System.out.println("El saco 3 de codigo," + saco3.obtenerCodigoBarras() + " ,costo,"+ saco3.obtenerCosto() +
+            " ,y contiene el cafe asignado " + saco3.obtenerCafeAsignado());
     }
 
+    private static void cafeAMano(){
+        Scanner input = new Scanner(System.in);
+
+        //Cafe1 instancias
+        Cafe cafe1 = new Cafe();
+        System.out.println("Por favor ingrese los datos del cafe1");
+        System.out.println("Serial");
+        String serial = input.nextLine();
+
+        System.out.println("Variedad");
+        String variedad = input.nextLine();
+
+        System.out.println("Altura del cultivo");
+        Integer alturaCultivos = input.nextInt();
+
+        cafe1.ponerSerial2(serial);
+        cafe1.ponerVariedad2(variedad);
+        cafe1.ponerAltura2(alturaCultivos);
+
+        //Saco1 instancias
+        SacoCafe saco1 = new SacoCafe();
+        System.out.println("Por favor ingrese los datos del saco1");
+        System.out.println("Precio");
+        Float precio = input.nextFloat();
+        input.nextLine();
+        System.out.println("Codigo de barras del saco");
+        String codigoBarras = input.nextLine();
+
+        saco1.ponerCodigoBarras2(codigoBarras);
+        saco1.ponerCosto2(precio);
+        saco1.ponerCafeAsignado2(cafe1);
+
+        System.out.println("El saco de cafe cuesta " + saco1.obtenerCosto2() + " y tiene cafe de la variedad "
+                + saco1.obtenerCafeAsignado2().obtenerVariedad2());
+
+    }
 
 }
